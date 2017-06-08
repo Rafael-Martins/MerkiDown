@@ -1,7 +1,6 @@
 <template>
   <div class="index">
-    <img src="https://cdn2.iconfinder.com/data/icons/file-types-7/32/md-markdown-filetype-document-file-filetype-document-file-512.png" height="40px" width="40px">
-    <span class="logo-name">MarkiDown</span>
+
     <navegation></navegation>
     <div class="container-fluid">
 

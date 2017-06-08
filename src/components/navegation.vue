@@ -1,14 +1,24 @@
 <template>
   <div class="navigation">
-    <div class="col-md-4 col-md-offset-4">
+  <div class="row">
+
+
+    <div class="col-md-3 col-sm-3 logo-name">
+      <img src="https://cdn2.iconfinder.com/data/icons/file-types-7/32/md-markdown-filetype-document-file-filetype-document-file-512.png" height="40px" width="40px">
+      MarkiDown
+    </div>
+
+    <div class="col-md-4 col-md-offset-1">
 
       <ul class="nav nav-pills nav-justified">
         <li role="presentation" class="active"><a href="#">Home</a></li>
         <li role="presentation"><a href="#">Import MD</a></li>
         <li role="presentation"><a href="#">About</a></li>
       </ul>
+
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -23,6 +33,6 @@ export default {
 
 <style>
 .logo-name {
-  font-size: 22px
+  font-size: 24px;
 };
 </style>
