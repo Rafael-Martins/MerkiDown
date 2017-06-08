@@ -1,7 +1,7 @@
 {
   "name": "merkidown",
   "version": "1.0.0",
-  "description": "A realtime markdown editor",
+  "description": "Markdown editor with live preview.",
   "author": "Rafael Martins",
   "private": true,
   "scripts": {
