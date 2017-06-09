@@ -6,6 +6,13 @@
 
 ``` This is a web interface to convert MD code into HTML in real time, made with VueJS and Bootstrap ```
 
+## Preview image
+
+```
+Is full responsive
+```
+![Image of MerkiDown](http://i.imgur.com/iqcJXTg.png)
+
 ## Build Setup
 
 ``` bash
