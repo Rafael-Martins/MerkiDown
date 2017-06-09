@@ -1,6 +1,10 @@
-# merkidown
+# MerkiDown
 
 > Markdown editor with live preview.
+
+## Details
+
+``` This is a web interface to convert MD code into HTML in real time, made with VueJS and Bootstrap ```
 
 ## Build Setup
 
