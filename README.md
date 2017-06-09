@@ -8,9 +8,8 @@
 
 ## Preview image
 
-```
-Is full responsive
-```
+Its full responsive!
+
 ![Image of MerkiDown](http://i.imgur.com/iqcJXTg.png)
 
 ## Build Setup
