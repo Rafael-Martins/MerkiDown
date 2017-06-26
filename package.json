@@ -8,10 +8,22 @@
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
-    "lint": "eslint --ext .js,.vue src"
+    "lint": "eslint --ext .js,.vue src",
+    "test": "./node_modules/.bin/jest"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+      ".*\\.(vue)$": "<rootDir>/node_modules/jest-vue-preprocessor"
+    }
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "jest-vue-preprocessor": "^1.0.1",
     "markdown": "^0.5.0",
     "vue": "^2.3.3",
     "vue-router": "^2.3.1"
