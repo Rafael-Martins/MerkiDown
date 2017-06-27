@@ -1,5 +1,7 @@
 <template>
-  <preview-box :htmlValue="content"></preview-box>
+  <div class="preview-box__container">
+    <preview-box :htmlValue="content"></preview-box>
+  </div>
 </template>
 
 <script>
@@ -25,4 +27,9 @@ export default {
 </script>
 
 <style>
+.preview-box__container {
+  width: 70%;
+  margin: auto;
+  margin-top: 10%;
+}
 </style>
