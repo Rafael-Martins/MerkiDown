@@ -1,8 +1,6 @@
 <template>
   <div class="navigation">
   <div class="row">
-
-
     <div class="col-md-3 logo-name">
       <img src="https://cdn2.iconfinder.com/data/icons/file-types-7/32/md-markdown-filetype-document-file-filetype-document-file-512.png" height="40px" width="40px">
       MarkiDown

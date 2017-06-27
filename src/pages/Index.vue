@@ -1,11 +1,9 @@
 <template>
   <div class="index">
-
     <navegation></navegation>
+
     <div class="container-fluid">
-
       <div class="row editor-content">
-
         <div class="col-md-5 col-md-offset-1">
           <editor-box @markdown="markdownConvert"></editor-box>
         </div>
@@ -13,9 +11,7 @@
         <div class="col-md-5">
           <preview-box :htmlValue="htmlValue"></preview-box>
         </div>
-
       </div>
-
     </div>
   </div>
 
