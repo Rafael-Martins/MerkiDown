@@ -16,10 +16,10 @@
 
         <li role="presentation" :class="['dropdown', dropdownVisible ? 'open' : '']" @click="toggle">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            Start from Template <span class="caret"></span>
+            Use Template <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="#">Docs</a></li>
+            <li class=""><a href="#">Docs</a></li>
           </ul>
         </li>
         <li role="presentation"><a href="#">About</a></li>
