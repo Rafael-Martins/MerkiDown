@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { markdown } from 'markdown';
+import { convertToHTML } from '@/services/markdown';
 import editorBox from '@/components/editorBox';
 import previewBox from '@/components/previewBox';
 import navegation from '@/components/navegation';
@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     markdownConvert(mdCode) {
-      this.htmlValue = markdown.toHTML(mdCode, 'Gruber');
+      this.htmlValue = convertToHTML(mdCode);
     },
   },
   components: { editorBox, previewBox, navegation },
