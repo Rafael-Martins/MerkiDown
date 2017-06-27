@@ -12,12 +12,19 @@
           <preview-box :htmlValue="htmlValue"></preview-box>
         </div>
       </div>
+      <div class="col-md-6 col-md-offset-6">
+        <pre>{{ publishUrl }}</pre>
+
+        <button @click="publish" type="button" class="btn btn-default">Publish</button>
+      </div>
     </div>
   </div>
 
 </template>
 
 <script>
+import { database } from '@/db';
+import hash from '@/services/hash';
 import { convertToHTML } from '@/services/markdown';
 import editorBox from '@/components/editorBox';
 import previewBox from '@/components/previewBox';
@@ -28,11 +35,23 @@ export default {
   data() {
     return {
       htmlValue: '',
+      publishUrl: '',
+      editUrl: '',
     };
   },
   methods: {
     markdownConvert(mdCode) {
       this.htmlValue = convertToHTML(mdCode);
+    },
+    publish() {
+      const ref = database.ref().child('files').push();
+      const key = hash();
+
+      ref.set({ content: this.htmlValue, privateKey: key });
+
+      this.publishUrl = window.location.href + ref.key;
+      this.editUrl = `${window.location.href}edit/${key}`;
+      this.$router.go(this.editUrl);
     },
   },
   components: { editorBox, previewBox, navegation },

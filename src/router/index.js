@@ -6,7 +6,6 @@ import Published from '@/pages/published';
 
 Vue.use(Router);
 
-
 export default new Router({
   routes: [
     {
@@ -15,7 +14,12 @@ export default new Router({
       component: Index,
     },
     {
-      path: '/:noteId',
+      path: '/edit/:editId',
+      name: 'Index edit',
+      component: Index,
+    },
+    {
+      path: 'published/:noteId',
       cache: false,
       name: 'Published',
       component: Published,
