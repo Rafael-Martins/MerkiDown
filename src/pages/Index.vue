@@ -51,7 +51,7 @@ export default {
 
       this.publishUrl = window.location.href + ref.key;
       this.editUrl = `${window.location.href}edit/${key}`;
-      this.$router.go(this.editUrl);
+      // this.$router.go(this.editUrl);
     },
   },
   components: { editorBox, previewBox, navegation },
