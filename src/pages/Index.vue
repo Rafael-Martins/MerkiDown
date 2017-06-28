@@ -57,8 +57,10 @@ export default {
     publish() {
       const filesRef = database.ref().child('files').push();
       const hashGenerated = hash();
+      const hashRef = database.ref().child(`hash/${hashGenerated}`);
 
-      filesRef.set({ content: this.htmlValue, privateKey: hashGenerated });
+      filesRef.set({ content: this.htmlValue });
+      hashRef.set(filesRef.key);
 
       this.publishUrl = `${window.location.href}published/${filesRef.key}`;
       this.editUrl = `${window.location.href}edit/${hashGenerated}`;
