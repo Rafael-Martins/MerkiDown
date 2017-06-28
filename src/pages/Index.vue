@@ -20,11 +20,8 @@
       <div class="row">
 
         <div class="col-md-6 col-md-offset-3 text-center">
-          <pre>{{ publishUrl }}</pre>
-        </div>
-
-        <div class="col-md-2 ">
-          <button @click="publish" type="button" class="btn btn-default">Publish</button>
+          <button @click="publish" type="button" class="btn btn-default btn-lg">Publish</button>
+          <pre v-if="publishUrlShow" class="url-show-box"><a :href="publishUrl">{{ publishUrl }}</a></pre>
         </div>
 
       </div>
@@ -49,6 +46,7 @@ export default {
     return {
       htmlValue: '',
       publishUrl: '',
+      publishUrlShow: false,
       editUrl: '',
     };
   },
@@ -57,13 +55,14 @@ export default {
       this.htmlValue = convertToHTML(mdCode);
     },
     publish() {
-      const ref = database.ref().child('files').push();
+      const filesRef = database.ref().child('files').push();
       const hashGenerated = hash();
 
-      ref.set({ content: this.htmlValue, privateKey: hashGenerated });
+      filesRef.set({ content: this.htmlValue, privateKey: hashGenerated });
 
-      this.publishUrl = window.location.href + ref.key;
+      this.publishUrl = `${window.location.href}published/${filesRef.key}`;
       this.editUrl = `${window.location.href}edit/${hashGenerated}`;
+      this.publishUrlShow = true;
       // this.$router.go(this.editUrl);
     },
   },
@@ -83,5 +82,9 @@ export default {
 
 .editor-content {
   margin-top: 40px;
+}
+
+.url-show-box {
+  margin-top: 13px;
 }
 </style>
