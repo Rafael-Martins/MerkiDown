@@ -3,7 +3,9 @@
     <navegation></navegation>
 
     <div class="container-fluid">
+
       <div class="row editor-content">
+
         <div class="col-md-5 col-md-offset-1">
           <editor-box @markdown="markdownConvert"></editor-box>
         </div>
@@ -11,13 +13,24 @@
         <div class="col-md-5">
           <preview-box :htmlValue="htmlValue"></preview-box>
         </div>
-      </div>
-      <div class="col-md-6 col-md-offset-6">
-        <pre>{{ publishUrl }}</pre>
 
-        <button @click="publish" type="button" class="btn btn-default">Publish</button>
       </div>
+
+
+      <div class="row">
+
+        <div class="col-md-6 col-md-offset-3 text-center">
+          <pre>{{ publishUrl }}</pre>
+        </div>
+
+        <div class="col-md-2 ">
+          <button @click="publish" type="button" class="btn btn-default">Publish</button>
+        </div>
+
+      </div>
+
     </div>
+
   </div>
 
 </template>
@@ -45,12 +58,12 @@ export default {
     },
     publish() {
       const ref = database.ref().child('files').push();
-      const key = hash();
+      const hashGenerated = hash();
 
-      ref.set({ content: this.htmlValue, privateKey: key });
+      ref.set({ content: this.htmlValue, privateKey: hashGenerated });
 
       this.publishUrl = window.location.href + ref.key;
-      this.editUrl = `${window.location.href}edit/${key}`;
+      this.editUrl = `${window.location.href}edit/${hashGenerated}`;
       // this.$router.go(this.editUrl);
     },
   },

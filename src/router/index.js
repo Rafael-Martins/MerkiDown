@@ -20,7 +20,7 @@ export default new Router({
       component: Index,
     },
     {
-      path: 'published/:noteId',
+      path: '/published/:noteId',
       name: 'Published',
       component: Published,
     },
