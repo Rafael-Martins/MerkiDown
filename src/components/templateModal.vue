@@ -7,22 +7,35 @@
       </div>
       <div class="modal-body">
 
-        <div class="row">
+        <div class="row form-group">
 
-          <div class="col-md-3">
-            <div class="input-group">
+          <div class="col-lg-3 col-md-6">
               <label>Project Name</label>
               <input type="text" class="form-control" placeholder="Project Name">
-            </div>
           </div>
 
-          <div class="col-md-3">
-            <div class="input-group">
+          <div class="col-lg-3 col-md-6">
               <label>Project Description</label>
-              <textarea class="form-control" rows="3" placeholder="One Paragraph of project description."></textarea>
-            </div>
+              <textarea class="form-control" placeholder="One Paragraph of project description."></textarea>
           </div>
 
+          <div class="col-lg-3 col-md-6">
+              <label>Getting Started</label>
+              <textarea class="form-control" placeholder="These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system."></textarea>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+              <label>Prerequisites</label>
+              <textarea class="form-control" placeholder="What things you need to install the software and how to install them"></textarea>
+          </div>
+
+        </div>
+
+        <div class="row form-group">
+          <div class="col-lg-3 col-md-6">
+              <label>Installing</label>
+              <textarea class="form-control" placeholder="A step by step series of examples that tell you have to get a development env running"></textarea>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
