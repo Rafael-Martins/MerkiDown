@@ -27,7 +27,6 @@
       </div>
 
     </div>
-{{test}}
   </div>
 </template>
 
@@ -47,7 +46,6 @@ export default {
       publishUrl: '',
       publishUrlShow: false,
       editUrl: '',
-      test: '',
     };
   },
   methods: {
@@ -67,11 +65,16 @@ export default {
       this.publishUrlShow = true;
       // this.$router.go(this.editUrl);
     },
-    created() {
-      const hashUrl = this.$route.params.editId;
-      const refHashUrl = database.ref(`hash/${hashUrl}`);
-      refHashUrl.once('value', snapshot => (this.test = snapshot.val()));
-    },
+  },
+  created() {
+    let contentKey = '';
+    const refHashUrl = database.ref(`hash/${this.$route.params.editId}`);
+
+    refHashUrl.once('value', (hashSnapshot) => {
+      contentKey = hashSnapshot.val();
+      const refContentUrl = database.ref(`files/${contentKey}`);
+      refContentUrl.once('value', contentSnapshot => (this.htmlValue = contentSnapshot.val().content));
+    });
   },
   components: { editorBox, previewBox, navegation },
 };
