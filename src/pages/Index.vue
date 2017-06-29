@@ -27,9 +27,8 @@
       </div>
 
     </div>
-
+{{test}}
   </div>
-
 </template>
 
 <script>
@@ -48,6 +47,7 @@ export default {
       publishUrl: '',
       publishUrlShow: false,
       editUrl: '',
+      test: '',
     };
   },
   methods: {
@@ -66,6 +66,11 @@ export default {
       this.editUrl = `${window.location.href}edit/${hashGenerated}`;
       this.publishUrlShow = true;
       // this.$router.go(this.editUrl);
+    },
+    created() {
+      const hashUrl = this.$route.params.editId;
+      const refHashUrl = database.ref(`hash/${hashUrl}`);
+      refHashUrl.once('value', snapshot => (this.test = snapshot.val()));
     },
   },
   components: { editorBox, previewBox, navegation },
