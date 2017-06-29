@@ -9,7 +9,7 @@
     <div class="col-md-5">
 
       <ul class="nav nav-pills nav-justified">
-        <li role="presentation" class="active"><a href="#">Home</a></li>
+        <li role="presentation" class=""><a href="#">Home</a></li>
         <li role="presentation"><a href="#">Import MD</a></li>
 
         <li role="presentation" :class="['dropdown', dropdownVisible ? 'open' : '']" @click="toggle">
