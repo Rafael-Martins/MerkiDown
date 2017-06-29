@@ -1,5 +1,6 @@
 <template>
   <div class="index">
+
     <navegation></navegation>
 
     <div class="container-fluid">
@@ -16,11 +17,11 @@
 
       </div>
 
-
       <div class="row">
 
         <div class="col-md-6 col-md-offset-3 text-center">
-          <button @click="publish" type="button" class="btn btn-default btn-lg">Publish</button>
+          <button @click="publish" type="button" class="btn btn-default btn-lg" v-if="!$route.params.editId">Publish</button>
+          <button @click="publish" type="button" class="btn btn-default btn-lg" v-if="$route.params.editId">Save</button>
           <pre v-if="publishUrlShow" class="url-show-box"><a :href="publishUrl">{{ publishUrl }}</a><br> <a :href="editUrl">{{ editUrl }}</a></pre>
         </div>
 
