@@ -18,7 +18,7 @@ export default {
   created() {
     const ref = database.ref(`files/${this.$route.params.noteId}`);
 
-    ref.once('value', snapshot => (this.content = snapshot.val().content));
+    ref.once('value', snapshot => (this.content = snapshot.val().contentHtml));
   },
   components: {
     previewBox,

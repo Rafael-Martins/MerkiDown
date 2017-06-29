@@ -7,7 +7,7 @@
       <div class="row editor-content">
 
         <div class="col-md-5 col-md-offset-1">
-          <editor-box @markdown="markdownConvert"></editor-box>
+          <editor-box @markdown="markdownConvert" :mdValue="mdValue"></editor-box>
         </div>
 
         <div class="col-md-5">
@@ -21,7 +21,7 @@
 
         <div class="col-md-6 col-md-offset-3 text-center">
           <button @click="publish" type="button" class="btn btn-default btn-lg">Publish</button>
-          <pre v-if="publishUrlShow" class="url-show-box"><a :href="publishUrl">{{ publishUrl }}</a></pre>
+          <pre v-if="publishUrlShow" class="url-show-box"><a :href="publishUrl">{{ publishUrl }}</a><br> <a :href="editUrl">{{ editUrl }}</a></pre>
         </div>
 
       </div>
@@ -46,10 +46,12 @@ export default {
       publishUrl: '',
       publishUrlShow: false,
       editUrl: '',
+      mdValue: '',
     };
   },
   methods: {
     markdownConvert(mdCode) {
+      this.mdValue = mdCode;
       this.htmlValue = convertToHTML(mdCode);
     },
     publish() {
@@ -57,7 +59,7 @@ export default {
       const hashGenerated = hash();
       const hashRef = database.ref().child(`hash/${hashGenerated}`);
 
-      filesRef.set({ content: this.htmlValue });
+      filesRef.set({ contentHtml: this.htmlValue, contentMd: this.mdValue });
       hashRef.set(filesRef.key);
 
       this.publishUrl = `${window.location.href}published/${filesRef.key}`;
@@ -73,7 +75,10 @@ export default {
     refHashUrl.once('value', (hashSnapshot) => {
       contentKey = hashSnapshot.val();
       const refContentUrl = database.ref(`files/${contentKey}`);
-      refContentUrl.once('value', contentSnapshot => (this.htmlValue = contentSnapshot.val().content));
+      refContentUrl.once('value', (contentSnapshot) => {
+        this.htmlValue = contentSnapshot.val().contentHtml;
+        this.mdValue = contentSnapshot.val().contentMd;
+      });
     });
   },
   components: { editorBox, previewBox, navegation },
