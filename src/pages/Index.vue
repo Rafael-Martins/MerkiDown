@@ -48,6 +48,7 @@ export default {
       publishUrlShow: false,
       editUrl: '',
       mdValue: '',
+      saveId: '',
     };
   },
   methods: {
@@ -69,7 +70,8 @@ export default {
       // this.$router.go(this.editUrl);
     },
     save() {
-      // const filesRef = database.ref().child('files/' + );
+      const filesRef = database.ref().child(`files/${this.saveId}`);
+      filesRef.update({ contentHtml: this.htmlValue, contentMd: this.mdValue });
     },
   },
   created() {
@@ -87,6 +89,7 @@ export default {
         this.htmlValue = contentSnapshot.val().contentHtml;
         this.mdValue = contentSnapshot.val().contentMd;
         this.publishUrl = `http://localhost:8080/#/published/${refContentUrl.key}`;
+        this.saveId = refContentUrl.key;
       });
     });
   },
