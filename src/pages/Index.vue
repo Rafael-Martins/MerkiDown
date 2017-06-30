@@ -22,7 +22,7 @@
         <div class="col-md-6 col-md-offset-3 text-center">
           <button @click="publish" type="button" class="btn btn-default btn-lg" v-if="!$route.params.editId">Publish</button>
           <button @click="save" type="button" class="btn btn-default btn-lg" v-if="$route.params.editId">Save</button>
-          <pre v-if="publishUrlShow" class="url-show-box"><a :href="publishUrl">http://localhost:8080/#/published/{{ publishUrl }}</a><br> <a :href="editUrl">http://localhost:8080/#/edit/{{ editUrl }}</a></pre>
+          <pre v-if="publishUrlShow" class="url-show-box"><a :href="publishUrl">{{ publishUrl }}</a><br> <a :href="editUrl">{{ editUrl }}</a></pre>
         </div>
 
       </div>
@@ -65,7 +65,7 @@ export default {
       hashRef.set(filesRef.key);
 
       this.publishUrl = `http://localhost:8080/#/published/${filesRef.key}`;
-      this.editUrl = hashGenerated;
+      this.editUrl = `http://localhost:8080/#/edit/${hashGenerated}`;
       this.publishUrlShow = true;
       // this.$router.go(this.editUrl);
     },
@@ -80,7 +80,7 @@ export default {
     }
     let contentKey = '';
     const refHashUrl = database.ref(`hash/${this.$route.params.editId}`);
-    this.editUrl = this.$route.params.editId;
+    this.editUrl = `http://localhost:8080/#/edit/${this.$route.params.editId}`;
 
     refHashUrl.once('value', (hashSnapshot) => {
       contentKey = hashSnapshot.val();
