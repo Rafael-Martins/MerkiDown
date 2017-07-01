@@ -10,16 +10,7 @@
 
       <ul class="nav nav-pills nav-justified">
         <li role="presentation" class=""><a href="#">Home</a></li>
-        <li role="presentation"><a href="#">Import MD</a></li>
-
-        <li role="presentation" :class="['dropdown', dropdownVisible ? 'open' : '']" @click="toggle">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            Use Template <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li class=""><a href="#">Docs</a></li>
-          </ul>
-        </li>
+        <li role="presentation"><a href="#">Use Template</a></li>
         <li role="presentation"><a href="#">About</a></li>
       </ul>
 
