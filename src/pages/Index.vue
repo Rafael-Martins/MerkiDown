@@ -32,12 +32,11 @@
 </template>
 
 <script>
-import { database } from '@/db';
-import hash from '@/services/hash';
-import { convertToHTML } from '@/services/markdown';
 import editorBox from '@/components/editorBox';
 import previewBox from '@/components/previewBox';
 import navegation from '@/components/navegation';
+import db from '@/services/db';
+import { convertToHTML } from '@/services/markdown';
 
 export default {
   name: 'index',
@@ -57,41 +56,23 @@ export default {
       this.htmlValue = convertToHTML(mdCode);
     },
     publish() {
-      const filesRef = database.ref().child('files').push();
-      const hashGenerated = hash();
-      const hashRef = database.ref().child(`hash/${hashGenerated}`);
-
-      filesRef.set({ contentHtml: this.htmlValue, contentMd: this.mdValue });
-      hashRef.set(filesRef.key);
-
-      this.publishUrl = `http://localhost:8080/#/published/${filesRef.key}`;
-      this.editUrl = `http://localhost:8080/#/edit/${hashGenerated}`;
+      db.publish(this.htmlValue, this.mdValue, this.$route.params.editId);
       this.publishUrlShow = true;
-      // this.$router.go(this.editUrl);
     },
     save() {
-      const filesRef = database.ref().child(`files/${this.saveId}`);
-      filesRef.update({ contentHtml: this.htmlValue, contentMd: this.mdValue });
+      db.save(this.htmlValue, this.mdValue, this.saveId);
     },
   },
   created() {
     if (this.$route.params.editId) {
       this.publishUrlShow = true;
     }
-    let contentKey = '';
-    const refHashUrl = database.ref(`hash/${this.$route.params.editId}`);
-    this.editUrl = `http://localhost:8080/#/edit/${this.$route.params.editId}`;
-
-    refHashUrl.once('value', (hashSnapshot) => {
-      contentKey = hashSnapshot.val();
-      const refContentUrl = database.ref(`files/${contentKey}`);
-      refContentUrl.once('value', (contentSnapshot) => {
-        this.htmlValue = contentSnapshot.val().contentHtml;
-        this.mdValue = contentSnapshot.val().contentMd;
-        this.publishUrl = `http://localhost:8080/#/published/${refContentUrl.key}`;
-        this.saveId = refContentUrl.key;
-      });
-    });
+    const content = db.getEditContent(this.$route.params.editId);
+    this.htmlValue = content.htmlValue;
+    this.mdValue = content.mdValue;
+    this.publishUrl = content.publishUrl;
+    this.saveId = content.saveId;
+    this.editUrl = content.editUrl;
   },
   components: { editorBox, previewBox, navegation },
 };

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { database } from '@/db';
+// import { database } from '@/services/db';
 import previewBox from '@/components/previewBox';
 import navegation from '@/components/navegation';
 
@@ -31,9 +31,9 @@ export default {
     };
   },
   created() {
-    const ref = database.ref(`files/${this.$route.params.noteId}`);
+//    const ref = database.ref(`files/${this.$route.params.noteId}`);
 
-    ref.once('value', snapshot => (this.content = snapshot.val().contentHtml));
+  //  ref.once('value', snapshot => (this.content = snapshot.val().contentHtml));
   },
   components: {
     previewBox, navegation,
