@@ -4,6 +4,15 @@
     <navegation></navegation>
 
     <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-offset-8">
+          <div class="btn btn-default btn-md">
+            btn
+          </div>
+          <div class="popover bottom" role="tooltip"><div class="arrow" style="top: -12%;"></div><h3 class="popover-title">Popover title</h3><div class="popover-content">And here's some amazing content. It's very engaging. Right?</div></div>
+
+        </div>
+      </div>
 
       <div class="row editor-content">
 
