@@ -22,7 +22,7 @@
         <div class="col-md-6 col-md-offset-3 text-center">
           <button @click="publish" type="button" class="btn btn-default btn-lg" v-if="!$route.params.editId">Publish</button>
           <button @click="save" type="button" class="btn btn-default btn-lg" v-if="$route.params.editId">Save</button>
-          <pre v-if="document.publishUrlShow" class="url-show-box"><a :href="document.publishUrl">{{ document.publishUrl }}</a><br> <a :href="document.editUrl">{{ document.editUrl }}</a></pre>
+          <pre v-if="document.publishUrlShow" class="url-show-box"><a :href="document.publishedUrl">{{ document.publishedUrl }}</a><br> <a :href="document.editUrl">{{ document.editUrl }}</a></pre>
         </div>
 
       </div>
@@ -37,19 +37,13 @@ import previewBox from '@/components/previewBox';
 import navegation from '@/components/navegation';
 import db from '@/services/db';
 import { convertToHTML } from '@/services/markdown';
+import Document from '@/models/document';
 
 export default {
   name: 'index',
   data() {
     return {
-      document: {
-        htmlValue: '',
-        publishUrl: '',
-        publishUrlShow: false,
-        editUrl: '',
-        mdValue: '',
-        saveId: '',
-      },
+      document: new Document(),
     };
   },
   methods: {
@@ -64,8 +58,8 @@ export default {
         this.$route.params.editId,
         );
       this.document.publishUrlShow = true;
-      this.document.publishUrl = publishLinks.publishKey;
-      this.document.editUrl = publishLinks.editHash;
+      this.document.publishKey = publishLinks.publishKey;
+      this.document.editKey = publishLinks.editHash;
     },
     save() {
       db.save(this.document.htmlValue, this.document.mdValue, this.document.saveId);
