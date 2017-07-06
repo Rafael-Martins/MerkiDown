@@ -1,1 +1,1 @@
-export const url = 'https://merkidown.firebaseapp.com/#/';
+export const url = 'https://merkidown.firebaseapp.com/#';
