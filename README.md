@@ -1,14 +1,16 @@
-# MerkiDown
+# MerkiDown [![Build Status](https://travis-ci.org/Rafael-Martins/MerkiDown.svg?branch=master)](https://travis-ci.org/Rafael-Martins/MerkiDown)
 
 > Markdown editor with live preview.
 
+> [Demo](https://merkidown.firebaseapp.com/#/)
+
 ## Details
 
-``` This is a web interface to convert MD code into HTML in real time, made with VueJS and Bootstrap ```
+```This is a full responsive web interface to convert MD code into HTML in real time, made with VueJS and Bootstrap.```
+
+```You can publish HTML that will be displayed on a random generated url, this feature is made with Firebase.  ```
 
 ## Preview image
-
-Its full responsive!
 
 ![Image of MerkiDown](http://i.imgur.com/iqcJXTg.png)
 
