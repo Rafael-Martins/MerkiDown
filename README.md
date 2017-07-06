@@ -6,9 +6,9 @@
 
 ## Details
 
-```This is a full responsive web interface to convert MD code into HTML in real time, made with VueJS and Bootstrap.```
+This is a full responsive web interface to convert MD code into HTML in real time, made with VueJS and Bootstrap.
 
-```You can publish HTML that will be displayed on a random generated url, this feature is made with Firebase.  ```
+You can publish HTML that will be displayed on a random generated url, this feature is made with Firebase.
 
 ## Preview image
 
