@@ -1,5 +1,9 @@
 language: node_js
 
+branches:
+  only:
+    - master
+
 cache:
   directories:
     - node_modules
@@ -7,11 +11,12 @@ cache:
 node_js:
   - '7'
   - '6'
-  - '4'
+
+install:
+  - yarn global add firebase-tools
 
 script:
+  - rm -f src/config.js
+  - mv src/configDeploy.js src/config.js
   - yarn build
-
-branches:
-  only:
-    - master
+  - firebase deploy --token ${FIREBASE_TOKEN} --non-interactive

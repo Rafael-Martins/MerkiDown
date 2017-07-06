@@ -1,6 +1,8 @@
+import { url } from '@/config';
+
 export default class Document {
   constructor() {
-    this.baseUrl = 'http://localhost:8080/#';
+    this.baseUrl = url;
     this.htmlValue = '';
     this.publishKey = '';
     this.publishUrlShow = false;
