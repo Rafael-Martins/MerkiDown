@@ -7,7 +7,7 @@
 
       <div class="row editor-content">
 
-        <div class="col-md-5 col-md-offset-1">
+        <div class="col-md-10 col-md-offset-1">
           <preview-box :htmlValue="content"></preview-box>
         </div>
 
@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import { database } from '@/db';
 import previewBox from '@/components/previewBox';
 import navegation from '@/components/navegation';
+import db from '@/services/db';
 
 export default {
   name: 'index',
@@ -31,9 +31,7 @@ export default {
     };
   },
   created() {
-    const ref = database.ref(`files/${this.$route.params.noteId}`);
-
-    ref.once('value', snapshot => (this.content = snapshot.val().contentHtml));
+    db.showSaved(this.$route.params.noteId).then((val) => { this.content = val; });
   },
   components: {
     previewBox, navegation,
@@ -42,5 +40,7 @@ export default {
 </script>
 
 <style>
-
+.editor-content {
+  margin-top: 40px;
+}
 </style>

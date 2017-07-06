@@ -8,11 +8,11 @@
       <div class="row editor-content">
 
         <div class="col-md-5 col-md-offset-1">
-          <editor-box @markdown="markdownConvert" :mdValue="mdValue"></editor-box>
+          <editor-box @markdown="markdownConvert" :mdValue="document.mdValue"></editor-box>
         </div>
 
         <div class="col-md-5">
-          <preview-box :htmlValue="htmlValue"></preview-box>
+          <preview-box :htmlValue="document.htmlValue"></preview-box>
         </div>
 
       </div>
@@ -22,7 +22,7 @@
         <div class="col-md-6 col-md-offset-3 text-center">
           <button @click="publish" type="button" class="btn btn-default btn-lg" v-if="!$route.params.editId">Publish</button>
           <button @click="save" type="button" class="btn btn-default btn-lg" v-if="$route.params.editId">Save</button>
-          <pre v-if="publishUrlShow" class="url-show-box"><a :href="publishUrl">{{ publishUrl }}</a><br> <a :href="editUrl">{{ editUrl }}</a></pre>
+          <pre v-if="document.publishUrlShow" class="url-show-box"><a :href="document.publishedUrl">{{ document.publishedUrl }}</a><br> <a :href="document.editUrl">{{ document.editUrl }}</a></pre>
         </div>
 
       </div>
@@ -32,65 +32,46 @@
 </template>
 
 <script>
-import { database } from '@/db';
-import hash from '@/services/hash';
-import { convertToHTML } from '@/services/markdown';
 import editorBox from '@/components/editorBox';
 import previewBox from '@/components/previewBox';
 import navegation from '@/components/navegation';
+import db from '@/services/db';
+import { convertToHTML } from '@/services/markdown';
+import Document from '@/models/document';
 
 export default {
   name: 'index',
   data() {
     return {
-      htmlValue: '',
-      publishUrl: '',
-      publishUrlShow: false,
-      editUrl: '',
-      mdValue: '',
-      saveId: '',
+      document: new Document(),
     };
   },
   methods: {
     markdownConvert(mdCode) {
-      this.mdValue = mdCode;
-      this.htmlValue = convertToHTML(mdCode);
+      this.document.mdValue = mdCode;
+      this.document.htmlValue = convertToHTML(mdCode);
     },
     publish() {
-      const filesRef = database.ref().child('files').push();
-      const hashGenerated = hash();
-      const hashRef = database.ref().child(`hash/${hashGenerated}`);
-
-      filesRef.set({ contentHtml: this.htmlValue, contentMd: this.mdValue });
-      hashRef.set(filesRef.key);
-
-      this.publishUrl = `http://localhost:8080/#/published/${filesRef.key}`;
-      this.editUrl = `http://localhost:8080/#/edit/${hashGenerated}`;
-      this.publishUrlShow = true;
-      // this.$router.go(this.editUrl);
+      const publishLinks = db.publish(
+        this.document.htmlValue,
+        this.document.mdValue,
+        this.$route.params.editId,
+        );
+      this.document.publishUrlShow = true;
+      this.document.publishKey = publishLinks.publishKey;
+      this.document.editKey = publishLinks.editHash;
     },
     save() {
-      const filesRef = database.ref().child(`files/${this.saveId}`);
-      filesRef.update({ contentHtml: this.htmlValue, contentMd: this.mdValue });
+      db.save(this.document.htmlValue, this.document.mdValue, this.document.saveId);
     },
   },
   created() {
-    if (this.$route.params.editId) {
-      this.publishUrlShow = true;
+    if (!this.$route.params.editId) {
+      return;
     }
-    let contentKey = '';
-    const refHashUrl = database.ref(`hash/${this.$route.params.editId}`);
-    this.editUrl = `http://localhost:8080/#/edit/${this.$route.params.editId}`;
-
-    refHashUrl.once('value', (hashSnapshot) => {
-      contentKey = hashSnapshot.val();
-      const refContentUrl = database.ref(`files/${contentKey}`);
-      refContentUrl.once('value', (contentSnapshot) => {
-        this.htmlValue = contentSnapshot.val().contentHtml;
-        this.mdValue = contentSnapshot.val().contentMd;
-        this.publishUrl = `http://localhost:8080/#/published/${refContentUrl.key}`;
-        this.saveId = refContentUrl.key;
-      });
+    db.getEditContent(this.$route.params.editId).then((val) => {
+      this.document = val;
+      this.document.publishUrlShow = true;
     });
   },
   components: { editorBox, previewBox, navegation },
