@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import Vue from 'vue';
 import Router from 'vue-router';
-import Index from '@/pages/index';
+import Index from '@/pages/Index';
 import Published from '@/pages/published';
 
 Vue.use(Router);
