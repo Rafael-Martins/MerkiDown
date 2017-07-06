@@ -25,13 +25,7 @@ export default {
   name: 'navigation',
   data() {
     return {
-      dropdownVisible: null,
     };
-  },
-  methods: {
-    toggle() {
-      this.dropdownVisible = !this.dropdownVisible;
-    },
   },
 };
 </script>
