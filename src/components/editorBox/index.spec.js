@@ -1,22 +1,19 @@
 import Vue from 'vue';
-import editorBox from '../components/editorBox';
+import EditorBox from './EditorBox';
 
-const mountComponent = () => {
-  const component = new Vue(editorBox).$mount();
-  return component;
-};
+const mountComponent = () => new Vue(EditorBox).$mount();
 
 describe('Editor Box', () => {
   let component;
-  beforeEach(() => {
-    component = mountComponent();
-  });
+
+  beforeEach(() => component = mountComponent());
+
   it('should call markdown function', () => {
     const mockFn = jest.fn();
     component.markdown = mockFn;
     component.markdown();
     component.$el.querySelector('textarea').value = 'test';
-    console.log(component.$el.querySelector('textarea').value);
+
     const evt = new Event('input');
     component.$el.querySelector('textarea').dispatchEvent(evt);
 
