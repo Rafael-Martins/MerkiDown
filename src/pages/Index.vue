@@ -1,12 +1,9 @@
 <template>
   <div class="index">
-
     <navigation></navigation>
 
     <div class="container-fluid">
-
       <div class="row editor-content">
-
         <div class="col-md-5 col-md-offset-1">
           <editor-box @markdown="markdownConvert" :mdValue="document.mdValue"></editor-box>
         </div>
@@ -14,19 +11,15 @@
         <div class="col-md-5">
           <preview-box :htmlValue="document.htmlValue"></preview-box>
         </div>
-
       </div>
 
       <div class="row">
-
         <div class="col-md-6 col-md-offset-3 text-center">
           <button @click="publish" type="button" class="btn btn-default btn-lg" v-if="!$route.params.editId">Publish</button>
           <button @click="save" type="button" class="btn btn-default btn-lg" v-if="$route.params.editId">Save</button>
-          <pre v-if="document.publishUrlShow" class="url-show-box"><a :href="document.publishedUrl">{{ document.publishedUrl }}</a><br> <a :href="document.editUrl">{{ document.editUrl }}</a></pre>
+          <pre v-if="isPublishUrlVisible" class="url-show-box"><a :href="document.publishedUrl">{{ document.publishedUrl }}</a><br> <a :href="document.editUrl">{{ document.editUrl }}</a></pre>
         </div>
-
       </div>
-
     </div>
   </div>
 </template>
@@ -44,6 +37,7 @@ export default {
   data() {
     return {
       document: new Document(),
+      isPublishUrlVisible: false,
     };
   },
   methods: {
@@ -52,26 +46,20 @@ export default {
       this.document.htmlValue = convertToHTML(mdCode);
     },
     publish() {
-      const publishLinks = db.publish(
-        this.document.htmlValue,
-        this.document.mdValue,
-        this.$route.params.editId,
-        );
-      this.document.publishUrlShow = true;
-      this.document.publishKey = publishLinks.publishKey;
-      this.document.editKey = publishLinks.editHash;
+      this.document.publish();
     },
     save() {
-      db.save(this.document.htmlValue, this.document.mdValue, this.document.saveId);
+      const { htmlValue, mdValue, publishedId } = this.document;
+
+      db.saveDocument(htmlValue, mdValue, publishedId);
     },
   },
   created() {
-    if (!this.$route.params.editId) {
-      return;
-    }
-    db.getEditContent(this.$route.params.editId).then((val) => {
-      this.document = val;
-      this.document.publishUrlShow = true;
+    if (!this.$route.params.editId) return;
+
+    db.findDocumentByEditKey(this.$route.params.editId).then((doc) => {
+      this.document = (new Document(), doc);
+      this.isPublishUrlVisible = true;
     });
   },
   components: { editorBox, previewBox, navigation },

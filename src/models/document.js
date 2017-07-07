@@ -4,11 +4,19 @@ export default class Document {
   constructor() {
     this.baseUrl = url;
     this.htmlValue = '';
+    this.mdValue = '';
     this.publishKey = '';
     this.publishUrlShow = false;
     this.editKey = '';
-    this.mdValue = '';
-    this.saveId = '';
+  }
+
+  publish() {
+    const { htmlValue, mdValue } = this.document;
+    const publishLinks = db.publishDocument(htmlValue, mdValue, this.$route.params.editId);
+
+    this.isPublishUrlVisible = true;
+
+    Object.assign(this.document, publishLinks);
   }
 
   get publishedUrl() {

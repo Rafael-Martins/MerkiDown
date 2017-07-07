@@ -31,7 +31,8 @@ export default {
     };
   },
   created() {
-    db.showSaved(this.$route.params.noteId).then((val) => { this.content = val; });
+    db.findDocumentById(this.$route.params.noteId)
+      .then((val) => { this.content = val; });
   },
   components: {
     previewBox,
