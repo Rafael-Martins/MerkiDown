@@ -1,7 +1,7 @@
 <template>
   <div class="index">
 
-    <navegation></navegation>
+    <navigation></navigation>
 
     <div class="container-fluid">
 
@@ -34,7 +34,7 @@
 <script>
 import editorBox from '@/components/editorBox';
 import previewBox from '@/components/previewBox';
-import navegation from '@/components/navegation';
+import navigation from '@/components/navigation';
 import db from '@/services/db';
 import { convertToHTML } from '@/services/markdown';
 import Document from '@/models/document';
@@ -74,7 +74,7 @@ export default {
       this.document.publishUrlShow = true;
     });
   },
-  components: { editorBox, previewBox, navegation },
+  components: { editorBox, previewBox, navigation },
 };
 </script>
 

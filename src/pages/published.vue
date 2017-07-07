@@ -1,7 +1,7 @@
 <template>
   <div class="preview-box__container">
 
-    <navegation></navegation>
+    <navigation></navigation>
 
     <div class="container-fluid">
 
@@ -20,7 +20,7 @@
 
 <script>
 import previewBox from '@/components/previewBox';
-import navegation from '@/components/navegation';
+import navigation from '@/components/navigation';
 import db from '@/services/db';
 
 export default {
@@ -34,7 +34,7 @@ export default {
     db.showSaved(this.$route.params.noteId).then((val) => { this.content = val; });
   },
   components: {
-    previewBox, navegation,
+    previewBox, navigation,
   },
 };
 </script>
