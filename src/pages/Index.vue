@@ -28,8 +28,6 @@
 import editorBox from '@/components/EditorBox';
 import previewBox from '@/components/PreviewBox';
 import navigation from '@/components/Navigation';
-import db from '@/services/db';
-import { convertToHTML } from '@/services/markdown';
 import Document from '@/models/document';
 
 export default {
@@ -41,26 +39,22 @@ export default {
     };
   },
   methods: {
-    markdownConvert(mdCode) {
-      this.document.mdValue = mdCode;
-      this.document.htmlValue = convertToHTML(mdCode);
+    markdownConvert(mdVal) {
+      this.document.mdValue = mdVal;
     },
     publish() {
-      this.document.publish();
+      this.document.publish(this.$route.params.editId);
+      this.isPublishUrlVisible = true;
     },
     save() {
-      const { htmlValue, mdValue, publishedId } = this.document;
-
-      db.saveDocument(htmlValue, mdValue, publishedId);
+      this.document.save();
     },
   },
   created() {
     if (!this.$route.params.editId) return;
 
-    db.findDocumentByEditKey(this.$route.params.editId).then((doc) => {
-      this.document = (new Document(), doc);
-      this.isPublishUrlVisible = true;
-    });
+    this.document.getByEditKey(this.$route.params.editId)
+      .then(doc => (this.document = (new Document(), doc)));
   },
   components: { editorBox, previewBox, navigation },
 };
