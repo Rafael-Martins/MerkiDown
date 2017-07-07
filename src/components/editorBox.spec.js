@@ -7,17 +7,16 @@ const mountComponent = () => {
 };
 
 describe('Editor Box', () => {
-  let component
+  let component;
   beforeEach(() => {
-    component = mountComponent()
-  })
+    component = mountComponent();
+  });
   it('should call markdown function', () => {
-
     const mockFn = jest.fn();
     component.markdown = mockFn;
-    component.markdown()
-    component.$el.querySelector('textarea').value = 'test'
-    console.log(component.$el.querySelector('textarea').value)
+    component.markdown();
+    component.$el.querySelector('textarea').value = 'test';
+    console.log(component.$el.querySelector('textarea').value);
     const evt = new Event('input');
     component.$el.querySelector('textarea').dispatchEvent(evt);
 
