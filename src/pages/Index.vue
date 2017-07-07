@@ -32,9 +32,9 @@
 </template>
 
 <script>
-import editorBox from '@/components/editorBox';
-import previewBox from '@/components/previewBox';
-import navigation from '@/components/navigation';
+import editorBox from '@/components/EditorBox';
+import previewBox from '@/components/PreviewBox';
+import navigation from '@/components/Navigation';
 import db from '@/services/db';
 import { convertToHTML } from '@/services/markdown';
 import Document from '@/models/document';

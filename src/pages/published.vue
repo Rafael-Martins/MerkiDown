@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import previewBox from '@/components/previewBox';
-import navigation from '@/components/navigation';
+import previewBox from '@/components/PreviewBox';
+import navigation from '@/components/Navigation';
 import db from '@/services/db';
 
 export default {
@@ -34,7 +34,8 @@ export default {
     db.showSaved(this.$route.params.noteId).then((val) => { this.content = val; });
   },
   components: {
-    previewBox, navigation,
+    previewBox,
+    navigation,
   },
 };
 </script>
