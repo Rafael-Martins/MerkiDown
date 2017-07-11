@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import previewBox from '@/components/PreviewBox';
-import navigation from '@/components/Navigation';
+import previewBox from '@/components/previewBox';
+import navigation from '@/components/navigation';
 import db from '@/services/db';
 
 export default {

@@ -25,9 +25,9 @@
 </template>
 
 <script>
-import editorBox from '@/components/EditorBox';
-import previewBox from '@/components/PreviewBox';
-import navigation from '@/components/Navigation';
+import editorBox from '@/components/editorBox';
+import previewBox from '@/components/previewBox';
+import navigation from '@/components/navigation';
 import Document from '@/models/document';
 
 export default {
