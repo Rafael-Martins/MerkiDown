@@ -33,5 +33,5 @@ export default {
 <style>
 .logo-name {
   font-size: 24px;
-};
+}
 </style>

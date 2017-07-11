@@ -1,7 +1,7 @@
 <template>
   <div class="preview-box__container">
 
-    <navegation></navegation>
+    <navigation></navigation>
 
     <div class="container-fluid">
 
@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import previewBox from '@/components/previewBox';
-import navegation from '@/components/navegation';
+import previewBox from '@/components/PreviewBox';
+import navigation from '@/components/Navigation';
 import db from '@/services/db';
 
 export default {
@@ -31,10 +31,12 @@ export default {
     };
   },
   created() {
-    db.showSaved(this.$route.params.noteId).then((val) => { this.content = val; });
+    db.findDocumentById(this.$route.params.noteId)
+      .then((val) => { this.content = val; });
   },
   components: {
-    previewBox, navegation,
+    previewBox,
+    navigation,
   },
 };
 </script>

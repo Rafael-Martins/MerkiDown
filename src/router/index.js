@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Vue from 'vue';
 import Router from 'vue-router';
 import Index from '@/pages/Index';
-import Published from '@/pages/published';
+import Published from '@/pages/Published';
 
 Vue.use(Router);
 
