@@ -17,17 +17,5 @@ install:
   - npm install
 
 script:
-  - rm -f src/config.js
-  - mv src/configDeploy.js src/config.js
-  - touch src/services/apiKeys.js
-  - echo 'const config = {
-    apiKey: ${FIREBASE_TOKEN},
-    authDomain: 'merkidown.firebaseapp.com',
-    databaseURL: 'https://merkidown.firebaseio.com/',
-    projectId: 'merkidown',
-  };
-
-  export { config };
-  ' > src/services/apiKeys.js
   - npm run build
   - firebase deploy --token ${FIREBASE_TOKEN} --non-interactive
