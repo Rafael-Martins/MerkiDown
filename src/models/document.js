@@ -1,8 +1,5 @@
-import { url } from '@/config';
-
 export default class Document {
   constructor() {
-    this.baseUrl = url;
     this.htmlValue = '';
     this.publishKey = '';
     this.publishUrlShow = false;
@@ -12,10 +9,10 @@ export default class Document {
   }
 
   get publishedUrl() {
-    return `${this.baseUrl}/published/${this.publishKey}`;
+    return `http://${window.location.hostname}:${window.location.port}/#/published/${this.publishKey}`;
   }
 
   get editUrl() {
-    return `${this.baseUrl}/edit/${this.editKey}`;
+    return `http://${window.location.hostname}:${window.location.port}/#/edit/${this.editKey}`;
   }
 }
